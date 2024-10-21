@@ -19,13 +19,15 @@ public class MenuUI : MonoBehaviour
 
     private void GoToGameplayScene()
     {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
         SceneManager.LoadScene("FirstLevel");
     }
 
     private void ExitGame()
     {
+        GameManager.Instance.AudioManager.PlaySFX(SFX.ButtonClick);
 #if UNITY_EDITOR
-       UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
        Application.Quit();
 #endif

@@ -9,7 +9,8 @@ public enum SFX
     PlayerJump,
     PlayerAttack,
     PlayerHurt,
-    PlayerDeath
+    PlayerDeath,
+    ButtonClick
 }
 
 [Serializable]
