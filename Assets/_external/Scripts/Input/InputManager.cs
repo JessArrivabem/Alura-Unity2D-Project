@@ -1,6 +1,7 @@
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager
 {
@@ -10,6 +11,7 @@ public class InputManager
 
     public event Action OnJump;
     public event Action OnAttack;
+    public event Action OnMenuOpenClose;
 
     public InputManager()
     {
@@ -18,6 +20,7 @@ public class InputManager
 
         playerControls.Gameplay.Jump.performed += OnJumpPerformed;
         playerControls.Gameplay.Attack.performed += OnAttackPerformed;
+        playerControls.UI.OpenCloseMenu.performed += OpenClosePauseMenuPerformed;
 
     }
 
@@ -30,14 +33,18 @@ public class InputManager
     {
         OnAttack?.Invoke();
     }
-
-    public void DisablePlayerInput()
+    private void OpenClosePauseMenuPerformed(InputAction.CallbackContext obj)
     {
-        playerControls.Gameplay.Disable();
+        if (SceneManager.GetActiveScene().name != "FirstLevel") return;
+        OnMenuOpenClose?.Invoke();
     }
+    public void DisablePlayerInput() => playerControls.Gameplay.Disable();
 
-    public void EnableGameplayInput()
-    {
-        playerControls.Gameplay.Enable();
-    }
+    public void EnablePlayerInput() => playerControls.Gameplay.Enable();
+
+    public void EnableUIInput() => playerControls.UI.Enable();
+
+    public void DisableUIInput() => playerControls.UI.Disable();
+
+
 }

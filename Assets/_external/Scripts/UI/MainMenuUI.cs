@@ -15,6 +15,8 @@ public class MainMenuUI : MonoBehaviour
 
     private void OnEnable()
     {
+        optionsPanel.SetActive(false);
+
         startButton.onClick.AddListener(GoToGameplayScene);
         optionsButton.onClick.AddListener(OpenOptionsMenu);
         exitButton.onClick.AddListener(ExitGame);
