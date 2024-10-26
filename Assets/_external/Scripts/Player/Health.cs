@@ -29,5 +29,10 @@ public class Health : MonoBehaviour
             OnHurt?.Invoke();
         }
     }
+
+    public int GetLives()
+    {
+        return lives;
+    }
   
 }

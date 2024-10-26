@@ -25,7 +25,7 @@ public class PlayerBehavior : MonoBehaviour
         health = GetComponent<Health>();
 
         health.OnDead += HandlePlayerDeath;
-        health.OnHurt += PlayerHurtSound;
+        health.OnHurt += HandleHurt;
 
     }
 
@@ -64,8 +64,9 @@ public class PlayerBehavior : MonoBehaviour
         rigibody.velocity += Vector2.up * jumpForce;
     }
 
-    private void PlayerHurtSound()
+    private void HandleHurt()
     {
+        UpdateLives(health.GetLives());
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
     }
 
@@ -80,6 +81,13 @@ public class PlayerBehavior : MonoBehaviour
         rigibody.constraints = RigidbodyConstraints2D.FreezeAll; // avoid of player falling in the world
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
         GameManager.Instance.InputManager.DisablePlayerInput();
+
+        UpdateLives(health.GetLives());
+    }
+
+    private void UpdateLives(int amount)
+    {
+        GameManager.Instance.UpdateLives(amount);
     }
 
     private void Attack()

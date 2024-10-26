@@ -25,13 +25,16 @@ public class GameManager : MonoBehaviour
 
         totalKeys = FindObjectsOfType<CollectableKey>().Length;
         keysLeftToCollect = totalKeys;
+        UIManager.UpdateKeysLeftText(totalKeys, keysLeftToCollect);
 
         InputManager = new InputManager();
+
     }
 
     public void UpdateKeysLeft()
     {
         keysLeftToCollect--;
+        UIManager.UpdateKeysLeftText(totalKeys, keysLeftToCollect);
         CheckAllKeysCollected();
     }
 
@@ -41,6 +44,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bossDoor);
         }
+    }
+    public void UpdateLives(int amount)
+    {
+        UIManager.UpdateLivesText(amount);
     }
 
 }

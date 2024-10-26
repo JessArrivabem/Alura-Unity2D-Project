@@ -1,7 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI keysText;
+
+    [SerializeField] private TextMeshProUGUI livesText;
+
     [Header("Panels")]
     [SerializeField] private GameObject OptionsPanel;
     [SerializeField] private GameObject PausePanel;
@@ -33,5 +38,15 @@ public class UIManager : MonoBehaviour
     {
         print("Set options to be opened");
         OptionsPanel.SetActive(true);
+    }
+
+    public void UpdateKeysLeftText(int totalValue, int leftValue) 
+    { 
+        keysText.text = $"{leftValue}/{totalValue}";
+    }
+
+    public void UpdateLivesText(int amount)
+    {
+        livesText.text = $"{amount}";
     }
 }
