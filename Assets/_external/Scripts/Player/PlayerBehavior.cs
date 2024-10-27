@@ -28,7 +28,6 @@ public class PlayerBehavior : MonoBehaviour
         health.OnHurt += HandleHurt;
 
     }
-
     private void Start()
     {
         GameManager.Instance.InputManager.OnJump += HandleJump;
@@ -83,6 +82,8 @@ public class PlayerBehavior : MonoBehaviour
         GameManager.Instance.InputManager.DisablePlayerInput();
 
         UpdateLives(health.GetLives());
+
+        ScreenManager.Instance.sceneRestart();
     }
 
     private void UpdateLives(int amount)
@@ -108,6 +109,21 @@ public class PlayerBehavior : MonoBehaviour
         }
 
     }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "SceneTransition")
+        {
+            ScreenManager.Instance.sceneToMoveTo();
+        }
+
+        if(collision.gameObject.tag == "SceneRestart")
+        {
+            ScreenManager.Instance.sceneRestart();
+        }
+    }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

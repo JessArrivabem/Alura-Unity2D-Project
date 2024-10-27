@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -32,6 +33,7 @@ public abstract class BaseEnemy : MonoBehaviour
     private void HandleEnemyDeath()
     {
         animator.SetTrigger("dead");
+        this.GetComponent<Collider2D>().enabled = false;
         StartCoroutine(DestroyEnemy(1));
     }
 
