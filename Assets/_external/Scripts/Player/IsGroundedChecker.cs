@@ -10,8 +10,8 @@ public class IsGroundedChecker : MonoBehaviour
 
     public bool isGrounded()
     {
-        return Physics2D.OverlapBox // cria uma caixa invisível e verifica quais colliders estão naquela caixa
-            (checkerPosition.position, checkerSize, 0f, groundLayer);
+        return Physics2D.OverlapBox(checkerPosition.position, checkerSize, 0f, groundLayer); // cria uma caixa invisível e verifica quais colliders estão naquela caixa
+
     }
     private void OnDrawGizmos()
     {
@@ -22,7 +22,7 @@ public class IsGroundedChecker : MonoBehaviour
         }
         else
         {
-            Gizmos.color= Color.green;
+            Gizmos.color = Color.green;
         }
         Gizmos.DrawWireCube(checkerPosition.position, checkerSize);
     }

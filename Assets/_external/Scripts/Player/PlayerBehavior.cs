@@ -7,6 +7,8 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] private float speed = 5;
     [SerializeField] private float jumpForce = 3;
 
+    [SerializeField] private ParticleSystem hitParticle;
+
     [Header("Atack Properties")]
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private Transform attackPosition;
@@ -66,6 +68,7 @@ public class PlayerBehavior : MonoBehaviour
     private void HandleHurt()
     {
         UpdateLives(health.GetLives());
+        PlayHitParticle();
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerHurt);
     }
 
@@ -78,6 +81,7 @@ public class PlayerBehavior : MonoBehaviour
     {
         GetComponent<Collider2D>().enabled = false;
         rigibody.constraints = RigidbodyConstraints2D.FreezeAll; // avoid of player falling in the world
+        PlayHitParticle();
         GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerDeath);
         GameManager.Instance.InputManager.DisablePlayerInput();
 
@@ -122,12 +126,15 @@ public class PlayerBehavior : MonoBehaviour
             ScreenManager.Instance.sceneRestart();
         }
     }
-
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(attackPosition.position, attackRange);
+    }
+    private void PlayHitParticle()
+    {
+        ParticleSystem instatiateParticle = Instantiate(hitParticle, transform.position, transform.rotation);
+        instatiateParticle.Play();
     }
 
 }

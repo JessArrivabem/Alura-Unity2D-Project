@@ -1200,7 +1200,7 @@ Transform:
   m_GameObject: {fileID: 388478640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.71, y: -0.454, z: 0}
+  m_LocalPosition: {x: 12.75, y: -0.454, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1222,6 +1222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 7.5
+  hitParticle: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   attackRange: 0.36
   attackPosition: {fileID: 1699840585}
   attackLayer:
@@ -1697,7 +1698,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.56, y: -0.05399999, z: -10}
+  m_LocalPosition: {x: 13.9, y: -0.05399999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11114,7 +11115,7 @@ Transform:
   m_GameObject: {fileID: 1765834771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.56, y: -0.05399999, z: -10}
+  m_LocalPosition: {x: 13.9, y: -0.05399999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

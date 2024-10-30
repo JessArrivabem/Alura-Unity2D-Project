@@ -33,7 +33,7 @@ public class MeleeEnemy : BaseEnemy
         if (cooldownTimer < attackCooldown) return;
         if (PlayerInSight())
         {
-            animator.SetTrigger("attack");
+            enemyAnimator.SetTrigger("attack");
             AttackPlayer();
         }
     }

@@ -7,33 +7,37 @@ using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour
 {
-    protected Animator animator;
-
-    private Animator enemyAnimator;
+    protected Animator enemyAnimator;
     public Health enemyHealth;
-
     protected AudioSource audioSource;
+
+    [SerializeField] private ParticleSystem hitParticle;
 
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
+        enemyAnimator = GetComponent<Animator>();
 
-        animator = GetComponent<Animator>();
+        enemyAnimator = GetComponent<Animator>();
         enemyHealth = GetComponent<Health>();
 
-        enemyHealth.OnHurt += EnemyHurtAnim;
+        enemyHealth.OnHurt += HandleEnemyHurt;
         enemyHealth.OnDead += HandleEnemyDeath;
 
         audioSource = GetComponent<AudioSource>();
     }
     protected abstract void Update();
 
-    private void EnemyHurtAnim() => animator.SetTrigger("hurt");
+    private void HandleEnemyHurt()
+    {
+        enemyAnimator.SetTrigger("hurt");
+        PlayHitParticle();
+    } 
     
     private void HandleEnemyDeath()
     {
-        animator.SetTrigger("dead");
+        enemyAnimator.SetTrigger("dead");
         this.GetComponent<Collider2D>().enabled = false;
+        PlayHitParticle();
         StartCoroutine(DestroyEnemy(1));
     }
 
@@ -41,6 +45,12 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         Destroy(this.gameObject);
+    }
+
+    private void PlayHitParticle()
+    {
+        ParticleSystem instatiateParticle = Instantiate(hitParticle, transform.position, transform.rotation);
+        instatiateParticle.Play();
     }
 
 }
