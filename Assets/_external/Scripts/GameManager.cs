@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Dynamic Game Objects")]
     [SerializeField] private GameObject bossDoor;
+    [SerializeField] private PlayerBehavior player;
 
     [Header("Managers")]
     public UIManager UIManager;
@@ -48,6 +49,11 @@ public class GameManager : MonoBehaviour
     public void UpdateLives(int amount)
     {
         UIManager.UpdateLivesText(amount);
+    }
+
+    public PlayerBehavior GetPlayer()
+    {
+        return player;
     }
 
 }
