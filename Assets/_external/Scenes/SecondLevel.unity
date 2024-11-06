@@ -918,7 +918,7 @@ Transform:
   m_GameObject: {fileID: 388478640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 56.92, y: 0.92, z: 0}
+  m_LocalPosition: {x: 56.67, y: 3.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   jumpForce: 8
-  hitParticle: {fileID: 0}
+  hitParticle: {fileID: 4021103657954561960, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   attackRange: 0.36
   attackPosition: {fileID: 1699840585}
   attackLayer:
@@ -1349,7 +1349,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.07, y: 1.32, z: -10}
+  m_LocalPosition: {x: 57.82, y: 3.95, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2312,7 +2312,8 @@ GameObject:
   - component: {fileID: 682824904}
   - component: {fileID: 682824908}
   - component: {fileID: 682824909}
-  m_Layer: 0
+  - component: {fileID: 682824910}
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2493,6 +2494,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   attackRange: 1.5
+  attackSize: 1
+  attackOffset: {x: 1, y: -0.5, z: 0}
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &682824910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682824903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8ab932bba289a40b1668221819f509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 7
 --- !u!1001 &718975031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2503,7 +2522,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 929374088829733448, guid: 7a089aa98b9ef1243af3450499c4a0ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.23
+      value: 33.02
       objectReference: {fileID: 0}
     - target: {fileID: 929374088829733448, guid: 7a089aa98b9ef1243af3450499c4a0ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15060,7 +15079,7 @@ Transform:
   m_GameObject: {fileID: 1765834771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 58.07, y: 1.32, z: -10}
+  m_LocalPosition: {x: 57.82, y: 3.95, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -4,18 +4,45 @@ public class BossBehavior : MonoBehaviour
 {
     private Rigidbody2D rigidbodyBoss;
     private Transform playerPosition;
+    private Health health;
+    private Animator animator;
 
     [SerializeField] private float moveSpeed = 3f;
 
+    [Header("Attack properties")]
     [SerializeField] private float attackRange = 1f;
+    [SerializeField] private float attackSize = 1f;
+    [SerializeField] private Vector3 attackOffset;
+    [SerializeField] private LayerMask attackMask;
+
+    private Vector3 attackPosition;
 
     private bool canAttack = false;
     private bool isFlipped = true;
 
-    private void Start()
+    private void Awake()
     {
         rigidbodyBoss = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
+
+        health.OnHurt += PlayHurtAnim;
+        health.OnDead += HandleDeath;
+    }
+
+    private void Start()
+    {
         playerPosition = GameManager.Instance.GetPlayer().transform;
+    }
+
+    private void PlayHurtAnim()
+    {
+        animator.SetTrigger("hurt");
+    }
+
+    private void HandleDeath()
+    {
+        animator.SetTrigger("dead");
     }
 
     public void FollowPlayer()
@@ -59,8 +86,27 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    public void Attack()
+    {
+        attackPosition = transform.position;
+        attackPosition += transform.right * attackOffset.x;
+        attackPosition += transform.up * attackOffset.y;
+
+        Collider2D collisionInfo = Physics2D.OverlapCircle(attackPosition, attackSize, attackMask);
+        if(collisionInfo != null)
+        {
+            collisionInfo.GetComponent<Health>().TakeDamage();
+        }
+    }
+
     public bool GetCanAttack()
     {
         return canAttack;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(attackPosition, attackSize);
     }
 }
