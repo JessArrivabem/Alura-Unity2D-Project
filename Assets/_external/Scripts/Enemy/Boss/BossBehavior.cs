@@ -99,6 +99,11 @@ public class BossBehavior : MonoBehaviour
         }
     }
 
+    public void StartChasing()
+    {
+        animator.SetBool("canChase", true);
+    }
+
     public bool GetCanAttack()
     {
         return canAttack;

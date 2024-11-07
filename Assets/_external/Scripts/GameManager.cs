@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [Header("Dynamic Game Objects")]
     [SerializeField] private GameObject bossDoor;
     [SerializeField] private PlayerBehavior player;
+    [SerializeField] private BossBehavior boss;
+    [SerializeField] private BossFightTrigger bossFightTrigger;
 
     [Header("Managers")]
     public UIManager UIManager;
@@ -24,11 +26,13 @@ public class GameManager : MonoBehaviour
         if (Instance != null) Destroy(this.gameObject);
         Instance = this;
 
+        InputManager = new InputManager();
+
         totalKeys = FindObjectsOfType<CollectableKey>().Length;
         keysLeftToCollect = totalKeys;
         UIManager.UpdateKeysLeftText(totalKeys, keysLeftToCollect);
 
-        InputManager = new InputManager();
+        bossFightTrigger.OnPlayerEnterBossFight += ActivateBossBehavior;
 
     }
 
@@ -46,6 +50,12 @@ public class GameManager : MonoBehaviour
             Destroy(bossDoor);
         }
     }
+
+    private void ActivateBossBehavior()
+    {
+        boss.StartChasing();
+    }
+
     public void UpdateLives(int amount)
     {
         UIManager.UpdateLivesText(amount);
