@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    [SerializeField] private float speed = 5;
+    [SerializeField] private float moveSpeed = 5;
     [SerializeField] private float jumpForce = 3;
 
     [SerializeField] private ParticleSystem hitParticle;
@@ -35,18 +35,19 @@ public class PlayerBehavior : MonoBehaviour
         GameManager.Instance.InputManager.OnJump += HandleJump;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MovePlayer();
-        FlipSrite();
+        FlipSriteAccordingToDirection();
     }
     private void MovePlayer()
     {
          moveDirection = GameManager.Instance.InputManager.Movement;
-         transform.Translate(moveDirection * Time.deltaTime * speed, 0, 0);
+        Vector2 directionToMove = new Vector2 (moveDirection * moveSpeed, rigibody.velocity.y);
+         rigibody.velocity = directionToMove;
     }
 
-    private void FlipSrite()
+    private void FlipSriteAccordingToDirection()
     {
         if (moveDirection < 0)
         {
@@ -61,8 +62,8 @@ public class PlayerBehavior : MonoBehaviour
     private void HandleJump()
     {
         if(isGroundedChecker.isGrounded() == false) return; // se não estiver no chão ele vai retornar
-        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerJump);
         rigibody.velocity += Vector2.up * jumpForce;
+        GameManager.Instance.AudioManager.PlaySFX(SFX.PlayerJump);
     }
 
     private void HandleHurt()
@@ -86,8 +87,6 @@ public class PlayerBehavior : MonoBehaviour
         GameManager.Instance.InputManager.DisablePlayerInput();
 
         UpdateLives(health.GetLives());
-
-        ScreenManager.Instance.sceneRestart();
     }
 
     private void UpdateLives(int amount)
@@ -121,10 +120,6 @@ public class PlayerBehavior : MonoBehaviour
             ScreenManager.Instance.sceneToMoveTo();
         }
 
-        if(collision.gameObject.tag == "SceneRestart")
-        {
-            ScreenManager.Instance.sceneRestart();
-        }
     }
     private void OnDrawGizmos()
     {

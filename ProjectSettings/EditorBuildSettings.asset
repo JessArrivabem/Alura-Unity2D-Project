@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_external/Scenes/SecondLevel.unity
     guid: df515e5b18b05b540a42086069d49dcc
+  - enabled: 1
+    path: Assets/_external/Scenes/Credits.unity
+    guid: b6d1ad23aa68cbb4b864c270162cb197
   m_configObjects: {}
