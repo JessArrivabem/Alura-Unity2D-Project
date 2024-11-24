@@ -16,10 +16,12 @@ public class InputManager
     public InputManager()
     {
         playerControls = new PlayerControls();
-        playerControls.Gameplay.Enable();
+        EnablePlayerInput();
+        EnableUIInput();
 
         playerControls.Gameplay.Jump.performed += OnJumpPerformed;
         playerControls.Gameplay.Attack.performed += OnAttackPerformed;
+
         playerControls.UI.OpenCloseMenu.performed += OpenClosePauseMenuPerformed;
 
     }
@@ -36,6 +38,9 @@ public class InputManager
     private void OpenClosePauseMenuPerformed(InputAction.CallbackContext obj)
     {
         if (SceneManager.GetActiveScene().name != "FirstLevel") return;
+        OnMenuOpenClose?.Invoke();
+
+        if (SceneManager.GetActiveScene().name != "SecondLevel") return;
         OnMenuOpenClose?.Invoke();
     }
     public void DisablePlayerInput() => playerControls.Gameplay.Disable();

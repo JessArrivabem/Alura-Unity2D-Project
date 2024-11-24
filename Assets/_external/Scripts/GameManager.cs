@@ -18,20 +18,20 @@ public class GameManager : MonoBehaviour
     public UIManager UIManager;
     public AudioManager AudioManager;
 
-    private int totalKeys;
-    private int keysLeftToCollect;
+    private int totalKeys = 8;
+    private int keysLeftToCollect = 0;
 
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Awake() 
     {
         if (Instance != null) Destroy(this.gameObject);
         Instance = this;
 
         InputManager = new InputManager();
 
-        totalKeys = FindObjectsOfType<CollectableKey>().Length;
-        keysLeftToCollect = totalKeys;
+        //totalKeys = FindObjectsOfType<CollectableKey>().Length;
+        //keysLeftToCollect = totalKeys;
         UIManager.UpdateKeysLeftText(totalKeys, keysLeftToCollect);
 
         bossFightTrigger.OnPlayerEnterBossFight += ActivateBossBehavior;
@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
 
     public void UpdateKeysLeft()
     {
-        keysLeftToCollect--;
+        keysLeftToCollect++;
         UIManager.UpdateKeysLeftText(totalKeys, keysLeftToCollect);
         CheckAllKeysCollected();
     }
 
     private void CheckAllKeysCollected()
     {
-        if(keysLeftToCollect <= 0)
+        if(keysLeftToCollect >= 8)
         {
             Destroy(bossDoor);
         }

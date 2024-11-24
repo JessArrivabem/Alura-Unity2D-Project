@@ -9,6 +9,8 @@ public class BossBehavior : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 3f;
 
+    [SerializeField] private ParticleSystem hitParticle;
+
     [Header("Attack properties")]
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float attackSize = 1f;
@@ -38,11 +40,14 @@ public class BossBehavior : MonoBehaviour
     private void PlayHurtAnim()
     {
         animator.SetTrigger("hurt");
+        PlayHitParticle();
     }
 
     private void HandleDeath()
     {
         animator.SetTrigger("dead");
+        PlayHitParticle();
+
     }
 
     public void FollowPlayer()
@@ -113,5 +118,11 @@ public class BossBehavior : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(attackPosition, attackSize);
+    }
+
+    private void PlayHitParticle()
+    {
+        ParticleSystem instatiateParticle = Instantiate(hitParticle, transform.position, transform.rotation);
+        instatiateParticle.Play();
     }
 }

@@ -11,6 +11,7 @@ public enum SFX
     PlayerAttack,
     PlayerHurt,
     PlayerDeath,
+    KeyCollect,
     ButtonClick
 }
 
